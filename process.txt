@@ -1,0 +1,38 @@
+Source data:
+We use the Olist Brazilian E-commerce Public Dataset from Kaggle. https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce
+
+Files used:
+- olist_customers_dataset.csv
+- olist_sellers_dataset.csv
+- olist_products_dataset.csv
+- product_category_name_translation.csv
+- olist_orders_dataset.csv
+- olist_order_items_dataset.csv
+- olist_order_payments_dataset.csv
+- olist_order_reviews_dataset.csv
+
+Processing steps:
+1. Removed columns that were not used in our schema.
+2. Standardized missing values and converted empty fields to NULL where appropriate.
+3. Matched product category names with English translations.
+4. Created a separate Category table and assigned integer category_id values.
+5. Kept order-level data separate from order-item-level data.
+6. Kept payment data in a separate table because an order can have multiple payments.
+7. Kept review data in a separate table with one review per order.
+8. Exported cleaned files as:
+   - customer_clean.csv
+   - seller_clean.csv
+   - category_clean.csv
+   - product_clean.csv
+   - order_clean.csv
+   - orderitem_clean.csv
+   - payment_clean.csv
+   - review_clean.csv
+
+Notes:
+- CustomerOrder was used as the table name instead of Order because ORDER is a reserved SQL keyword.
+- payment_id is generated automatically in SQL using auto_increment.
+- order_id is unique in CustomerOrder.
+- (order_id, order_item_id) is the composite key in OrderItem.
+- (order_id, payment_sequential) is unique in Payment.
+- order_id is unique in Review.
